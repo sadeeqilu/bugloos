@@ -10,7 +10,7 @@ use App\Services\Filter;
 /**
  * Class Column
  */
-abstract class Column
+class Column
 {
     use TraitsConfigurable;
 
@@ -35,7 +35,7 @@ abstract class Column
     protected $value;
 
     /**
-     * @var bool|null|string|BaseFilter
+     * @var bool|null|string|Filter
      */
     protected $filter;
 
@@ -45,7 +45,7 @@ abstract class Column
     protected $format;
 
     /**
-     * BaseColumn constructor.
+     * Column constructor.
      * @param array $config
      */
     public function __construct(array $config)
@@ -113,7 +113,7 @@ abstract class Column
     }
 
     /**
-     * @return BaseFilter
+     * @return Filter
      */
     public function getFilter()
     {
@@ -121,7 +121,7 @@ abstract class Column
     }
 
     /**
-     * @param BaseFilter $filter
+     * @param Filter $filter
      */
     protected function setFilter(Filter $filter): void
     {

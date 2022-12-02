@@ -25,7 +25,16 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/Helpers/SortHelper.php",
+            "app/Services/GridService.php",
+            "app/Services/Filter.php",
+            "app/Services/Formatter.php",
+            "app/Services/EloquentData.php",
+            "app/Services/Column.php",
+            "app/Services/ArrayData.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

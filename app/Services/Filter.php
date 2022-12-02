@@ -6,9 +6,8 @@ use App\Traits\Configurable as TraitsConfigurable;
 
 /**
  * Class Filter.
- * @package Itstructure\GridView\Filters
  */
-abstract class Filter
+class Filter
 {
     use TraitsConfigurable;
 

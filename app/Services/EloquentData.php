@@ -6,6 +6,7 @@ use App\Helpers\SortHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
+use App\Services\GridService;
 
 /**
  * Class EloquentData.

@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Helpers\SortHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use App\Services\GridService;
 
 /**
  * Class ArrayData.
@@ -18,7 +19,6 @@ class ArrayData extends BaseData
 
     /**
      * ArrayData constructor.
-     * @param Builder $query
      */
     public function __construct(array $data)
     {
@@ -32,9 +32,8 @@ class ArrayData extends BaseData
      */
     public function get(int $perPage = GridService::DEFAULT_ROWS_PER_PAGE, int $page = GridService::DEFAULT_PAGE_NUMBER): Collection
     {
-        // return $this->query->offset(($page - 1) * $perPage)->limit($perPage)->get() ?? new Collection();
-        $newArray = array_chunk($this->data, $perPage, true);
-        return new Collection($newArray[$page]);
+        $newArray = array_chunk($this->array, $perPage, true);
+        return new Collection($newArray);
     }
 
     /**
@@ -74,6 +73,6 @@ class ArrayData extends BaseData
      */
     public function getCount(): int
     {
-        return count($this->array);
+        return count($this->array['data']);
     }
 }

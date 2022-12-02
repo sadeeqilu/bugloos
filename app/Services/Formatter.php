@@ -6,9 +6,8 @@ use App\Traits\Configurable as TraitsConfigurable;
 
 /**
  * Class Formatter
- * @package Itstructure\GridView\Formatters
  */
-abstract class Formatter
+class Formatter
 {
     use TraitsConfigurable;
 
