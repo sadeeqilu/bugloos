@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Services;
+namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use App\Traits\Configurable as TraitsConfigurable;
 
-/**
- * Class Formatter
- */
-class Formatter
+class Formatter extends Model
 {
+    use HasFactory;
+
     use TraitsConfigurable;
 
     /**
@@ -18,9 +19,9 @@ class Formatter
 
     /**
      * Formatter constructor.
-     * @param array $config
+     * @param object $config
      */
-    public function __construct($config = [])
+    public function __construct($config)
     {
         $this->loadConfig($config);
     }
@@ -34,5 +35,4 @@ class Formatter
     {
         return strip_tags($value, $this->allowableTags);
     }
-
 }

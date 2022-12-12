@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use ReflectionClass;
+use stdClass;
 
 /**
  * Class Configurable
@@ -10,14 +11,14 @@ use ReflectionClass;
 trait Configurable
 {
     /**
-     * @param array $config
+     * @param object $config
      */
-    public function loadConfig(array $config = [])
+    public function loadConfig(object $config)
     {
         $attributes = $this->attributes();
 
         foreach ($config as $key => $value) {
-            if (!in_array($key, $attributes)) {
+            if (!property_exists($attributes, $key)) {
                 continue;
             }
             $this->{$key} = $value;
@@ -25,15 +26,15 @@ trait Configurable
     }
 
     /**
-     * @return array
+     * @return object
      */
     protected function attributes()
     {
         $class = new ReflectionClass($this);
-        $names = [];
+        $names = new stdClass();
         foreach ($class->getProperties() as $property) {
             if (!$property->isStatic()) {
-                $names[] = $property->getName();
+                $names = $property->getName();
             }
         }
 

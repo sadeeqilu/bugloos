@@ -7,11 +7,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
 use App\Services\GridService;
+use App\Contracts\BaseDataInterface;
 
 /**
  * Class EloquentData.
  */
-class EloquentData implements BaseData
+class EloquentData implements BaseDataInterface
 {
     /**
      * @var Builder

@@ -28,12 +28,7 @@
         },
         "files": [
             "app/Helpers/SortHelper.php",
-            "app/Services/GridService.php",
-            "app/Services/Filter.php",
-            "app/Services/Formatter.php",
-            "app/Services/EloquentData.php",
-            "app/Services/Column.php",
-            "app/Services/ArrayData.php"
+            "app/Services/GridService.php"
         ]
     },
     "autoload-dev": {

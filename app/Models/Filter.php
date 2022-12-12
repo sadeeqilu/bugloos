@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Services;
+namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use App\Traits\Configurable as TraitsConfigurable;
 
-/**
- * Class Filter.
- */
-class Filter
+class Filter extends Model
 {
+    use HasFactory;
+
     use TraitsConfigurable;
 
     /**
@@ -30,7 +31,7 @@ class Filter
      * Filter constructor.
      * @param $config
      */
-    public function __construct($config = [])
+    public function __construct($config)
     {
         $this->loadConfig($config);
         $this->setValue();

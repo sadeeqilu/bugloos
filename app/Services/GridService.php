@@ -7,6 +7,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Traits\Configurable;
+use App\Models\Column;
+use App\Contracts\BaseDataInterface;
 
 class GridService {
 
@@ -65,16 +67,16 @@ class GridService {
 
     /**
      * Grid constructor.
-     * @param array $config
+     * @param object $config
      * @throws Exception
      */
-    public function __construct(array $config)
+    public function __construct(object $config)
     {
         $this->loadConfig($config);
         $this->request = request();
 
-        if (!($this->data instanceof BaseData)) {
-            throw new Exception('data must be instance of '.BaseData::class);
+        if (!($this->data instanceof BaseDataInterface)) {
+            throw new Exception('data must be instance of '.BaseDataInterface::class);
         }
     }
 
@@ -108,7 +110,7 @@ class GridService {
 
             if (is_string($config)) {
                 $config = array_merge(['attribute' => $config], $filterSubConfig);
-                $this->fillColumnsObjects(new Column($config));
+                $this->fillColumnsObjects(new Column((object) $config));
                 continue;
             }
 
@@ -120,7 +122,7 @@ class GridService {
                     continue;
                 }
 
-                $this->fillColumnsObjects(new Column($config));
+                $this->fillColumnsObjects(new Column((object) $config));
             }
         }
     }

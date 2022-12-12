@@ -6,11 +6,12 @@ use App\Helpers\SortHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use App\Services\GridService;
+use App\Contracts\BaseDataInterface;
 
 /**
  * Class ArrayData.
  */
-class ArrayData implements BaseData
+class ArrayData implements BaseDataInterface
 {
     /**
      * @var array

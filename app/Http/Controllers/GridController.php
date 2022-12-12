@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Services\ArrayData;
 use Illuminate\Http\Request;
+use App\Contracts\BaseDataInterface;
 
 class GridController extends BaseController
 {
+
+    protected $dataService;
+
+    public function __construct(BaseDataInterface $dataService)
+    {
+        $this->dataService = $dataService;
+    }
 
     public function getGrid(Request $request)
     {
@@ -14,6 +22,7 @@ class GridController extends BaseController
             'id' => 1,
             'active' => 'active'
         ];
+
         $data = 
             [
                 'data' => $arrayData,
@@ -44,10 +53,11 @@ class GridController extends BaseController
                 ]
             ];
 
-        $result = new ArrayData($data);
+        $this->dataService = new ArrayData($data);
+        // $result = new ArrayData($data);
         $ret = [
-            'count' => $result->getCount(),
-            'paginatedData' => $result->get(5)
+            'count' => $this->dataService->getCount(),
+            'paginatedData' => $this->dataService->get(5)
         ];
             
         return $this->successfulResponse($ret,"success");

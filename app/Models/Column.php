@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Services;
+namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use App\Traits\Configurable as TraitsConfigurable;
 use Exception;
-use App\Services\Formatter;
-use App\Services\Filter;
+use App\Models\Formatter;
+use App\Models\Filter;
 
-/**
- * Class Column
- */
-class Column
+class Column extends Model
 {
+    use HasFactory;
+
     use TraitsConfigurable;
 
     /**
@@ -22,7 +23,7 @@ class Column
     /**
      * @var string
      */
-    protected $attribute;
+    protected $column_attribute;
 
     /**
      * @var bool|null|string
@@ -46,9 +47,9 @@ class Column
 
     /**
      * Column constructor.
-     * @param array $config
+     * @param object $config
      */
-    public function __construct(array $config)
+    public function __construct(object $config)
     {
         $this->loadConfig($config);
         $this->buildFilter();
@@ -64,7 +65,7 @@ class Column
     }
 
     /**
-     * Render row attribute value.
+     * Render row column_attribute value.
      * @param $row
      * @return mixed
      */
@@ -89,16 +90,16 @@ class Column
      */
     public function getLabel(): string
     {
-        return $this->label ?? ucfirst($this->attribute);
+        return $this->label ?? ucfirst($this->column_attribute);
     }
 
     /**
-     * Get attribute.
+     * Get column_attribute.
      * @return string|null
      */
-    public function getAttribute()
+    public function getColumnAttribute()
     {
-        return $this->attribute;
+        return $this->column_attribute;
     }
 
     /**
@@ -107,7 +108,7 @@ class Column
     public function getSort()
     {
         if (is_null($this->sort) || $this->sort === true) {
-            return is_null($this->attribute) ? false : $this->attribute;
+            return is_null($this->column_attribute) ? false : $this->column_attribute;
         }
         return $this->sort;
     }
@@ -135,14 +136,14 @@ class Column
     {
         if (is_null($this->filter)) {
             $this->filter = new Filter([
-                'name' => $this->getAttribute(),
+                'name' => $this->getColumnAttribute(),
             ]);
 
         } else if (is_array($this->filter)) {
             if (isset($this->filter['class']) && class_exists($this->filter['class'])) {
                 $this->setFilter(
                     new $this->filter['class'](array_merge($this->filter, empty($this->filter['name']) ? [
-                            'name' => $this->getAttribute()
+                            'name' => $this->getColumnAttribute()
                         ] : [])
                     )
                 );
