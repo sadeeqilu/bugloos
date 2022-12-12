@@ -11,7 +11,7 @@ use App\Services\GridService;
 /**
  * Class EloquentData.
  */
-class EloquentData extends BaseData
+class EloquentData implements BaseData
 {
     /**
      * @var Builder

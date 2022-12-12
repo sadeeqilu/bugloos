@@ -10,7 +10,7 @@ use App\Services\GridService;
 /**
  * Class ArrayData.
  */
-class ArrayData extends BaseData
+class ArrayData implements BaseData
 {
     /**
      * @var array
